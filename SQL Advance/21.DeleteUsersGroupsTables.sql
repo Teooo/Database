@@ -1,0 +1,3 @@
+DELETE FROM Users
+WHERE Id = 2
+GO

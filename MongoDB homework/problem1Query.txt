@@ -1,0 +1,41 @@
+> use problem1
+switched to db problem1
+> show dbs
+local  0.078GB
+>
+> use problem1
+switched to db problem1
+> var bulk = db.courses.initializeUnorderedBulkOp();
+> bulk.insert({text:"blablabla",date:"taday",IsRead:"YES",user:{username:"pesho"
+,Name:"Pesho Goshev",webSite:"www.pesho.bg"}});
+> bulk.insert({text:"call me",date:"10-05-2015",IsRead:"NO",user:{username:"gesh
+o",Name:"Gosho Peshev",webSite:"www.gosho.bg"}});
+> bulk.execute();
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.courses.find();
+{ "_id" : ObjectId("55914880579c5e429ef118b4"), "text" : "blablabla", "date" : "
+taday", "IsRead" : "YES", "user" : { "username" : "pesho", "Name" : "Pesho Goshe
+v", "webSite" : "www.pesho.bg" } }
+{ "_id" : ObjectId("55914880579c5e429ef118b5"), "text" : "call me", "date" : "10
+-05-2015", "IsRead" : "NO", "user" : { "username" : "gesho", "Name" : "Gosho Pes
+hev", "webSite" : "www.gosho.bg" } }
+> db.courses.find(Name:"pesho");
+2015-06-29T16:32:16.127+0300 E QUERY    SyntaxError: Unexpected token :
+> db.courses.find({Name:"pesho"});
+>
+> db.courses.find({IsRead:"NO"});
+{ "_id" : ObjectId("55914880579c5e429ef118b5"), "text" : "call me", "date" : "10
+-05-2015", "IsRead" : "NO", "user" : { "username" : "gesho", "Name" : "Gosho Pes
+hev", "webSite" : "www.gosho.bg" } }
+>
+
+
